@@ -1,0 +1,4 @@
+package-*
+tsconfig.json
+.env
+node_modules
