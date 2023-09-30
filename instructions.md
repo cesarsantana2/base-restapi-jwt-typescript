@@ -110,10 +110,13 @@ Esse modulo me permite executar mais de um script por vêz
 * Lidar com o fluxo de token inválido
 * Migrar interface do Payload para models
 
+## Install Cors 
 
 ### Oportunidades de Melhoria 
 
 * Migrar credenciais de arquivo local para gerenciador de secrets na aws ou buckets s3, escrevendo policies
 * Express Validator/ hapi/joi para validar
+
+
 
 

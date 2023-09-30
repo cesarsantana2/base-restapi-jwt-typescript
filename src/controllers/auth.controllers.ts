@@ -35,8 +35,10 @@ export const signin = async (req: Request, res: Response) => {
         expiresIn: 60 * 60 * 12,
     });
 
-    res.header('auth-token', token).json({"user": user.email});
-    // res.header('auth-token', token).json(user);
+    res.header('auth-token', token).json({"id": user.id, 
+                                          "name": user.username, 
+                                          "email": user.email, 
+                                          "token": token});
 };
 
 export const profile = async (req: Request, res: Response) => {

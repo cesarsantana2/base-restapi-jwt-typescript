@@ -5,9 +5,6 @@ export interface IUser extends Document {
     username: string,
     email: string,
     password: string,
-    // curso: string,
-    // semestre: string,
-    // turma: string,
     encryptPassword(password: string): Promise<string>;
     validatePassword(password: string): Promise<boolean>;
 }

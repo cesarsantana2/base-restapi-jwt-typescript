@@ -41,8 +41,10 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const token = jsonwebtoken_1.default.sign({ _id: user._id }, process.env.TOKEN_SECRET || 'tokentest', {
         expiresIn: 60 * 60 * 12,
     });
-    res.header('auth-token', token).json({ "user": user.email });
-    // res.header('auth-token', token).json(user);
+    res.header('auth-token', token).json({ "id": user.id,
+        "name": user.username,
+        "email": user.email,
+        "token": token });
 });
 exports.signin = signin;
 const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
