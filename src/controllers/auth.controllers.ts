@@ -47,3 +47,33 @@ export const profile = async (req: Request, res: Response) => {
     //re-estrutura que dados devem ser enviados de acordo com a página de profile
     res.send(user);
 };
+
+export const validate = async (req: Request, res: Response) => {
+
+    const token: string | undefined = req.header('auth-token');
+    const token_secret: string | undefined = process.env.TOKEN_SECRET;
+    const user_email: string | undefined = req.body.email;
+
+    if(token == undefined){
+        return res.status(403).json("Invalid Token");
+    
+    }else if(token !== undefined && token_secret !== undefined){
+        const tokenValidate = jwt.verify(token,  token_secret);
+        const userId = token.sub;
+
+        const user = await User.findOne({email: user_email});
+        if(!user){
+            return res.status(403).json("Invalid Token");
+        }else {
+
+            const newToken: string = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET || 'tokentest', {
+                expiresIn: 60 * 60 * 12,
+            });
+
+            res.header('auth-token', newToken).json({"id": user.id, 
+                "name": user.username, 
+                "email": user.email, 
+                "token": newToken});
+        }
+    }      
+}
